@@ -39,9 +39,8 @@
                         <td><?php echo $row["title"] ?></td>
                         <td><?php echo $row["author"] ?></td>
                         <td><?php echo $row["category"] ?></td>
-                        <td><?php echo $row["description"] ?></td>
                         <td>
-                            <a href="" class="btn btn-info">本の詳細を観る</a>
+                            <a href="view.php?id=<?php echo $row["id"] ?>" class="btn btn-info">本の詳細を観る</a>
                             <a href="" class="btn btn-warning">編集する</a>
                             <a href="" class="btn btn-danger">削除する</a>
                         </td>
