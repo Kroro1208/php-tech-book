@@ -16,7 +16,7 @@
                 <a href="" class="btn btn btn-outline-primary">戻る</a>
             </div>
         </header>
-        <form action="" method="post">
+        <form action="process.php" method="post">
             <div class="form-element my-4">
                 <input class="form-control" type="text" name="title" placeholder="本のタイトルを入力">
             </div>
@@ -24,7 +24,7 @@
                 <input class="form-control" type="text" name="author" placeholder="著者名を入力">
             </div>
             <div class="form-element my-4">
-                <select name="type" class="form-control">
+                <select name="category" class="form-control">
                     <option value="">本の種類を選択</option>
                     <option value="Fiction">フィクション</option>   
                     <option value="Mystery">ミステリー</option>
