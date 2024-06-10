@@ -33,6 +33,7 @@
                     <option value="NonFiction">ノンフィクション</option>
                     <option value="Fantasy">ファンタジー</option>
                     <option value="Science">サイエンス</option>
+                    <option value="Tech">テクノロジー</option>
                 </select>
             </div>
             <div class="form-element my-4">
