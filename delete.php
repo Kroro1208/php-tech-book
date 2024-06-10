@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
     include("connect.php");
@@ -9,7 +10,8 @@ if (isset($_GET["id"])) {
 
     if ($stmt->execute()) {
         // 削除成功後にリダイレクト
-        header("Location: index.php?msg=delete-is-success"); // 削除後のクエリにメッセージ出す
+        $_SESSION["msg"] = "本の削除が成功しました";
+        header("Location: index.php");
         exit();
     } else {
         // 削除失敗の場合、エラーメッセージを表示

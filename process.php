@@ -1,4 +1,6 @@
 <?php
+session_start(); // セッションを開始
+
 include("connect.php");
 
 if (isset($_POST["create"])) {
@@ -12,12 +14,16 @@ if (isset($_POST["create"])) {
     $stmt->bind_param("ssss", $title, $author, $category, $description);
 
     if ($stmt->execute()) {
-        echo "データが登録されました";
+        $_SESSION["msg"] = "本の登録が成功しました";
     } else {
-        die("エラーが発生しました: " . $stmt->error);
+        $_SESSION["msg"] = "エラーが発生しました: " . $stmt->error;
     }
 
     $stmt->close();
+    $conn->close();
+
+    header("Location: index.php");
+    exit();
 }
 
 if (isset($_POST["edit"])) {
@@ -32,12 +38,14 @@ if (isset($_POST["edit"])) {
     $stmt->bind_param("ssssi", $title, $author, $category, $description, $id);
 
     if ($stmt->execute()) {
-        echo "データが更新されました";
+        $_SESSION["msg"] = "本の更新が成功しました";
     } else {
-        die("エラーが発生しました: " . $stmt->error);
+        $_SESSION["msg"] = "エラーが発生しました: " . $stmt->error;
     }
 
     $stmt->close();
-}
+    $conn->close();
 
-$conn->close();
+    header("Location: index.php");
+    exit();
+}

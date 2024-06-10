@@ -13,9 +13,18 @@
         <header class="d-flex justify-content-between my-4">
             <h1>PHP TECH BOOK List</h1>
             <div>
-                <a href="create.php" class="btn btn btn-primary">本を追加する</a>
+                <a href="create.php" class="btn btn-primary">本を追加する</a>
             </div>
         </header>
+
+        <?php
+        session_start();
+        if (isset($_SESSION['msg'])) {
+            echo "<div class='alert alert-success'>{$_SESSION['msg']}</div>";
+            unset($_SESSION['msg']); // メッセージを一度表示したらセッションから削除
+        }
+        ?>
+
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -30,15 +39,18 @@
             <tbody>
                 <?php
                 include("connect.php");
-                $sql = "SELECT * FROM books";
-                $result = mysqli_query($conn, $sql);
-                while ($row = mysqli_fetch_array($result)) {
+                $stmt = $conn->prepare("SELECT * FROM books");
+                $stmt->execute();
+                $result = $stmt->get_result();
+
+                while ($row = $result->fetch_assoc()) {
                 ?>
                     <tr>
-                        <td><?php echo $row["id"] ?></td>
-                        <td><?php echo $row["title"] ?></td>
-                        <td><?php echo $row["author"] ?></td>
-                        <td><?php echo $row["category"] ?></td>
+                        <td><?php echo htmlspecialchars($row["id"], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($row["title"], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($row["author"], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($row["category"], ENT_QUOTES, 'UTF-8'); ?></td>
+                        <td><?php echo htmlspecialchars($row["description"], ENT_QUOTES, 'UTF-8'); ?></td>
                         <td>
                             <a href="view.php?id=<?php echo $row["id"] ?>" class="btn btn-info">本の詳細を観る</a>
                             <a href="edit.php?id=<?php echo $row["id"] ?>" class="btn btn-warning">編集する</a>
@@ -47,6 +59,9 @@
                     </tr>
                 <?php
                 }
+
+                $stmt->close();
+                $conn->close();
                 ?>
             </tbody>
         </table>
