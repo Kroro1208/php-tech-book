@@ -26,7 +26,7 @@
             <div class="form-element my-4">
                 <select name="category" class="form-control">
                     <option value="">本の種類を選択</option>
-                    <option value="Fiction">フィクション</option>   
+                    <option value="Fiction">フィクション</option>
                     <option value="Mystery">ミステリー</option>
                     <option value="Language">語学</option>
                     <option value="SF">SF</option>
